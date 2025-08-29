@@ -1,0 +1,34 @@
+{
+  "npcs": [
+    {
+      "id": "npc_01",
+      "name": "Evelyn the Herbalist",
+      "portrait": "images/npc-evelyn.png",
+      "description": "A kind woman who sells herbs and potions in her cottage shop.",
+      "location": "Herbalist's Cottage"
+    },
+    {
+      "id": "npc_02",
+      "name": "Rowan the Blacksmith",
+      "portrait": "images/npc-rowan.png",
+      "description": "A gruff but reliable blacksmith who forges tools and charms.",
+      "location": "Forge"
+    }
+  ],
+  "items": [
+    {
+      "id": "item_01",
+      "name": "Crystal Bloom",
+      "image": "images/item-crystal-bloom.png",
+      "rarity": "rare",
+      "description": "A flower that glows faintly under the moonlight."
+    },
+    {
+      "id": "item_02",
+      "name": "Rusty Key",
+      "image": "images/item-rusty-key.png",
+      "rarity": "common",
+      "description": "An old key that looks like it unlocks something important."
+    }
+  ]
+}
