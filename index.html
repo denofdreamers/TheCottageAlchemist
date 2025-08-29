@@ -23,8 +23,28 @@
       </div>
       
       <div id="message-container" class="text-sm text-gray-700"></div>
+
+      <!-- Display first NPC from JSON -->
+      <div id="first-npc" class="mt-4 text-lg text-green-700"></div>
     </div>
     
     <script type="module" src="./src/main.js"></script>
+
+    <!-- Fetch content.json from GitHub -->
+    <script>
+      fetch("https://raw.githubusercontent.com/denofdreamers/TheCottageAlchemist/main/content.json")
+        .then(response => response.json())
+        .then(data => {
+          console.log("Loaded content:", data);
+
+          // Example: display first NPC name
+          if(data.npcs && data.npcs.length > 0){
+            document.getElementById("first-npc").textContent = "First NPC: " + data.npcs[0].name;
+          }
+        })
+        .catch(error => console.error("Error loading content:", error));
+    </script>
   </body>
 </html>
+
+
