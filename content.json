@@ -1,34 +1,46 @@
 {
   "npcs": [
     {
-      "id": "npc_01",
-      "name": "Evelyn the Herbalist",
-      "portrait": "images/npc-evelyn.png",
-      "description": "A kind woman who sells herbs and potions in her cottage shop.",
-      "location": "Herbalist's Cottage"
+      "id": "npc_001",
+      "name": "Willow the Herbalist",
+      "description": "A kind woman who knows the secrets of every plant in the valley.",
+      "portrait": "images/npcs/willow.png"
     },
     {
-      "id": "npc_02",
-      "name": "Rowan the Blacksmith",
-      "portrait": "images/npc-rowan.png",
-      "description": "A gruff but reliable blacksmith who forges tools and charms.",
-      "location": "Forge"
+      "id": "npc_002",
+      "name": "Bran the Blacksmith",
+      "description": "Gruff but fair, Bran forges tools for the whole town.",
+      "portrait": "images/npcs/bran.png"
     }
   ],
   "items": [
     {
-      "id": "item_01",
-      "name": "Crystal Bloom",
-      "image": "images/item-crystal-bloom.png",
-      "rarity": "rare",
-      "description": "A flower that glows faintly under the moonlight."
+      "id": "item_001",
+      "name": "Moonflower",
+      "type": "ingredient",
+      "description": "A glowing flower used in potions.",
+      "image": "images/items/moonflower.png"
     },
     {
-      "id": "item_02",
-      "name": "Rusty Key",
-      "image": "images/item-rusty-key.png",
-      "rarity": "common",
-      "description": "An old key that looks like it unlocks something important."
+      "id": "item_002",
+      "name": "Iron Key",
+      "type": "quest",
+      "description": "Opens the locked gate to the northern woods.",
+      "image": "images/items/iron_key.png"
+    }
+  ],
+  "locations": [
+    {
+      "id": "loc_001",
+      "name": "Herbalist's Cottage",
+      "description": "A cozy home filled with herbs, potions, and warmth.",
+      "image": "images/locations/herbalist_cottage.png"
+    },
+    {
+      "id": "loc_002",
+      "name": "Town Square",
+      "description": "The central hub where townsfolk gather.",
+      "image": "images/locations/town_square.png"
     }
   ]
 }
