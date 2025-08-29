@@ -1,46 +1,61 @@
 {
+  "shops": [
+    {
+      "name": "Herbalist's Hut",
+      "description": "A cozy cottage filled with jars of fragrant herbs.",
+      "personality": "friendly",
+      "items": [
+        {"name": "Lavender", "type": "herb", "price": 5},
+        {"name": "Rosemary", "type": "herb", "price": 3},
+        {"name": "Chamomile", "type": "herb", "price": 4}
+      ]
+    },
+    {
+      "name": "Crystal Cave",
+      "description": "Glittering minerals and enchanted crystals sparkle on every shelf.",
+      "personality": "mysterious",
+      "items": [
+        {"name": "Amethyst", "type": "crystal", "price": 10},
+        {"name": "Quartz", "type": "crystal", "price": 7},
+        {"name": "Moonstone", "type": "crystal", "price": 12}
+      ]
+    },
+    {
+      "name": "Tea Witch's Stall",
+      "description": "Bundles of magical teas and enchanted blends.",
+      "personality": "gossipy",
+      "items": [
+        {"name": "Sunlit Honey Tea", "type": "tea", "price": 8},
+        {"name": "Mint Leaf", "type": "herb", "price": 2},
+        {"name": "Golden Honey", "type": "ingredient", "price": 6}
+      ]
+    }
+  ],
+  "recipes": [
+    {
+      "name": "Lavender Sleep Charm",
+      "ingredients": ["Lavender", "Beeswax", "Ribbon"],
+      "product": "Sleep Charm",
+      "note": "Beginner recipe, unlocks reputation +1"
+    },
+    {
+      "name": "Sparkling Ink",
+      "ingredients": ["Crystal Dust", "Inkcap Mushroom", "Moonlight Essence"],
+      "product": "Sparkling Ink",
+      "note": "Secret recipe, discovered through experimentation"
+    },
+    {
+      "name": "Sunlit Honey Tea",
+      "ingredients": ["Golden Honey", "Chamomile", "Mint Leaf"],
+      "product": "Sunlit Honey Tea",
+      "note": "Famous tea, villagers will request this often"
+    }
+  ],
   "npcs": [
-    {
-      "id": "npc_001",
-      "name": "Willow the Herbalist",
-      "description": "A kind woman who knows the secrets of every plant in the valley.",
-      "portrait": "images/npcs/willow.png"
-    },
-    {
-      "id": "npc_002",
-      "name": "Bran the Blacksmith",
-      "description": "Gruff but fair, Bran forges tools for the whole town.",
-      "portrait": "images/npcs/bran.png"
-    }
-  ],
-  "items": [
-    {
-      "id": "item_001",
-      "name": "Moonflower",
-      "type": "ingredient",
-      "description": "A glowing flower used in potions.",
-      "image": "images/items/moonflower.png"
-    },
-    {
-      "id": "item_002",
-      "name": "Iron Key",
-      "type": "quest",
-      "description": "Opens the locked gate to the northern woods.",
-      "image": "images/items/iron_key.png"
-    }
-  ],
-  "locations": [
-    {
-      "id": "loc_001",
-      "name": "Herbalist's Cottage",
-      "description": "A cozy home filled with herbs, potions, and warmth.",
-      "image": "images/locations/herbalist_cottage.png"
-    },
-    {
-      "id": "loc_002",
-      "name": "Town Square",
-      "description": "The central hub where townsfolk gather.",
-      "image": "images/locations/town_square.png"
-    }
+    {"name": "Tea Witch", "role": "merchant", "shop": "Tea Witch's Stall"},
+    {"name": "Forager Twins", "role": "special ingredients", "shop": null},
+    {"name": "Traveling Crystal Seller", "role": "rare items", "shop": null},
+    {"name": "Old Herbalist", "role": "mentor", "shop": "Herbalist's Hut"}
   ]
 }
+
