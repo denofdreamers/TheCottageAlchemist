@@ -1,50 +1,78 @@
 // src/game.js
 
-// Game Data
-const player = {
-  gold: 20,
-  inventory: []
-};
-
-const shops = [
-  { name: "Herbalist's Hut", items: [{ name: "Lavender", price: 5 }, { name: "Rosemary", price: 3 }] },
-  { name: "Crystal Cave", items: [{ name: "Amethyst", price: 10 }, { name: "Quartz", price: 7 }] }
-];
-
 // DOM References
 const shopContainer = document.getElementById("shop-container");
 const inventoryList = document.getElementById("inventory-list");
 const messageContainer = document.getElementById("message-container");
 const craftButton = document.getElementById("craft-button");
 
-// Functions
+// Player Data
+const player = {
+  gold: 20,
+  inventory: [],
+  reputation: 0
+};
+
+// Game Content
+let content = {
+  shops: [],
+  recipes: []
+};
+
+// Fetch content.json
+async function loadContent() {
+  try {
+    const response = await fetch('/content.json');
+    content = await response.json();
+    showShops();
+    updateInventory();
+  } catch (err) {
+    console.error("Error loading content.json:", err);
+    showMessage("Failed to load game content.");
+  }
+}
+
+// Display shops and items
 function showShops() {
   shopContainer.innerHTML = "";
-  shops.forEach((shop, idx) => {
+  content.shops.forEach((shop, shopIdx) => {
     const shopDiv = document.createElement("div");
-    shopDiv.innerHTML = `<h3>${shop.name}</h3>`;
-    shop.items.forEach((item, i) => {
+    shopDiv.className = "mb-3 p-2 border rounded bg-cream-light";
+    shopDiv.innerHTML = `<h3 class="text-lg font-semibold">${shop.name}</h3>`;
+
+    shop.items.forEach((item, itemIdx) => {
       const btn = document.createElement("button");
       btn.textContent = `${item.name} - ${item.price} gold`;
-      btn.onclick = () => buyItem(idx, i);
+      btn.className = "m-1 bg-green-200 px-2 py-1 rounded";
+      btn.onclick = () => buyItem(shopIdx, itemIdx);
       shopDiv.appendChild(btn);
     });
+
     shopContainer.appendChild(shopDiv);
   });
 }
 
+// Buy an item
 function buyItem(shopIdx, itemIdx) {
-  const item = shops[shopIdx].items[itemIdx];
-  if (player.gold >= item.price) {
-    player.gold -= item.price;
+  const item = content.shops[shopIdx].items[itemIdx];
+  const shop = content.shops[shopIdx];
+
+  // Price may adjust based on shop personality
+  let finalPrice = item.price;
+  if (shop.personality === "friendly") finalPrice = Math.max(1, Math.floor(item.price * 0.9));
+  if (shop.personality === "grumpy") finalPrice = Math.ceil(item.price * 1.2);
+
+  if (player.gold >= finalPrice) {
+    player.gold -= finalPrice;
     player.inventory.push(item.name);
     updateInventory();
-    showMessage(`Bought ${item.name}!`);
+    showMessage(`${shop.name} sold you ${item.name} for ${finalPrice} gold!`);
   } else {
-    showMessage(`Not enough gold for ${item.name}`);
+    showMessage(`${shop.name} says: Not enough gold for ${item.name}`);
   }
 }
 
+// Update inventory display
 function updateInventory() {
   inventoryList.innerHTML = "";
   player.inventory.forEach(item => {
@@ -54,22 +82,40 @@ function updateInventory() {
   });
 }
 
+// Show a message
 function showMessage(msg) {
   messageContainer.textContent = msg;
 }
 
 // Crafting
 craftButton.addEventListener("click", () => {
-  if (player.inventory.length >= 2) {
-    const crafted = player.inventory.splice(0, 2).join(" + ");
+  if (player.inventory.length < 2) {
+    showMessage("You need at least 2 ingredients to craft!");
+    return;
+  }
+
+  // Check all recipe combinations
+  let craftedItem = null;
+  for (const recipe of content.recipes) {
+    if (recipe.ingredients.every(ing => player.inventory.includes(ing))) {
+      craftedItem = recipe.name;
+      // Remove used ingredients
+      recipe.ingredients.forEach(ing => {
+        const index = player.inventory.indexOf(ing);
+        if (index > -1) player.inventory.splice(index, 1);
+      });
+      break;
+    }
+  }
+
+  if (craftedItem) {
     updateInventory();
-    showMessage(`You crafted a potion: ${crafted}`);
+    showMessage(`You crafted: ${craftedItem}!`);
+    player.reputation += 1;
   } else {
-    showMessage("Not enough ingredients to craft");
+    showMessage("Combination didn't match any known recipe. Keep experimenting!");
   }
 });
 
-// Initialize
-showShops();
-updateInventory();
-
+// Initialize game
+loadContent();
