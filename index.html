@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cottage Alchemist</title>
+    <link rel="stylesheet" href="./src/game.css" />
+  </head>
+  <body class="bg-cream font-sans">
+    <div id="game-container" class="p-4 max-w-3xl mx-auto">
+      <h1 class="text-3xl mb-4">Cottage Alchemist</h1>
+      
+      <div id="shop-container" class="mb-4"></div>
+      
+      <div id="inventory-container" class="mb-4">
+        <h2 class="text-xl">Inventory</h2>
+        <ul id="inventory-list" class="list-disc pl-5"></ul>
+      </div>
+      
+      <div id="crafting-container" class="mb-4">
+        <h2 class="text-xl">Crafting</h2>
+        <button id="craft-button" class="bg-purple-200 px-2 py-1 rounded">Craft Potion</button>
+      </div>
+      
+      <div id="message-container" class="text-sm text-gray-700"></div>
+    </div>
+    
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>
